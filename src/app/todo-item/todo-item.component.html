@@ -1,4 +1,4 @@
-<div class="flex flex-row" >
-  <input class="mr-3 w-5 rounded-xl" type="checkbox" name="todo-checked" checked="false">
-  <p class="text-xl" >Go to jail</p>
+<div id={{todoId}} class="flex flex-row p-2 mb-3" >
+  <input class="mr-3 w-5 rounded-xl"  type="checkbox" [checked]="completed" name="todo-checked">
+  <p class="text-xl" >{{title}}</p>
 </div>

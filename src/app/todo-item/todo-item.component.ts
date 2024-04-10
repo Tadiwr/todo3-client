@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-todo-item',
@@ -8,5 +8,25 @@ import { Component } from '@angular/core';
   styleUrl: './todo-item.component.css'
 })
 export class TodoItemComponent {
+  @Input() title: string = "";
+  @Input() completed: boolean = false;
+  @Input() todoId: string = "";
 
+  unCheck() {
+
+  }
+
+  complete() {
+
+  }
+
+  toggleComplete() {
+
+  }
+}
+
+export type TodoItem = {
+  id : number,
+  title : string,
+  completed : boolean
 }
