@@ -1,5 +1,11 @@
 <div class="w-full p-10" >
 
+  @if (todoItems.length == 0) {
+    <div class="flex flex-col h-full justify-center items-center" >
+      <p>{{message}}</p>
+    </div>
+  }
+
   @for (todo of todoItems; track $index) {
     <app-todo-item todoId={{todo.id}} title={{todo.title}} [completed]="todo.completed" todoId={{todo.id}}></app-todo-item>
   }
