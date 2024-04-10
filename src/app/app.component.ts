@@ -8,7 +8,7 @@ import { HomeComponent } from "./home/home.component";
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
-    imports: [RouterOutlet, NavbarComponent, HomeComponent]
+    imports: [RouterOutlet, NavbarComponent, HomeComponent],
 })
 export class AppComponent {
   title = 'todo3-client';

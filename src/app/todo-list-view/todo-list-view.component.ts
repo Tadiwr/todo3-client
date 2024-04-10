@@ -1,22 +1,38 @@
-import { TodoItem } from './../todo-item/todo-item.component';
+import { TodoItem } from '../../lib/types/todo.type';
 import { Component } from '@angular/core';
 import { TodoItemComponent } from "../todo-item/todo-item.component";
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-todo-list-view',
     standalone: true,
     templateUrl: './todo-list-view.component.html',
     styleUrl: './todo-list-view.component.css',
-    imports: [TodoItemComponent]
+    imports: [TodoItemComponent, HttpClientModule],
+    providers : [HttpClientModule]
 })
 
 export class TodoListViewComponent {
 
-  todoItems : TodoItem[] = [
-    {id: 1, title: "Make git commits", completed:false},
-    {id: 2, title: "Learn Java Spring Boot", completed:true},
-    {id: 3, title: "Review Issue Log from Tadiwa", completed:false},
-    {id: 3, title: "Read Tailwind docs", completed:true},
-  ]
+  todoItems : TodoItem[] = [];
+  message = "Please Wait...";
+
+  constructor(private http: HttpClient) {}
+
+  private api_url = "http://localhost:8080/todos";
+
+  getTodos() {
+    let todosOb : Observable<TodoItem[]>;
+    todosOb = this.http.get<TodoItem[]>(this.api_url);
+
+    todosOb.subscribe((res) => {
+      this.todoItems = res;
+    });
+  }
+
+  async ngOnInit() {
+    this.getTodos();
+  }
 
 }
