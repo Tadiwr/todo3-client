@@ -1,3 +1,4 @@
+import { RefetchDataService } from './../refetch-data.service';
 import { TodoItem } from '../../lib/types/todo.type';
 import { Component } from '@angular/core';
 import { TodoItemComponent } from "../todo-item/todo-item.component";
@@ -18,7 +19,7 @@ export class TodoListViewComponent {
   todoItems : TodoItem[] = [];
   message = "Please Wait...";
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private refetch : RefetchDataService) {}
 
   private api_url = "http://localhost:8080/todos";
 
@@ -32,7 +33,10 @@ export class TodoListViewComponent {
   }
 
   async ngOnInit() {
-    this.getTodos();
+    this.getTodos(); // First time fetch;
+    this.refetch.triggerRefetchObservable().subscribe(() => {
+      this.getTodos();
+    })
   }
 
 }
