@@ -22,20 +22,40 @@ export class TodoItemComponent {
     "Content-Type" : "application/json",
   }
 
+
+
   unCheck() {
+    console.log("Clicked the button");
+    const req_url = "http://localhost:8080/todos/untick";
 
-  }
-
-  complete() {
-
+    axios(req_url, {
+      method: "POST",
+      headers : this.headers,
+      data: JSON.stringify({todoId: Number.parseInt(this.todoId)})
+    }).then((res) => {
+      this.refetch.triggerRefetch();
+    }).catch((err) => {
+      console.log(err);
+      alert(err.message);
+    });
   }
 
   toggleComplete() {
+    const req_url =  this.completed ? `${this.api_url}/untick` : `${this.api_url}/complete`;
 
+    axios(req_url, {
+      method: "POST",
+      headers : this.headers,
+      data: JSON.stringify({todoId: Number.parseInt(this.todoId)})
+    }).then((res) => {
+      this.refetch.triggerRefetch();
+    }).catch((err) => {
+      console.log(err);
+      alert(err.message);
+    });
   }
 
   async onDelete() {
-    console.log("Clicked the button");
     const req_url = "http://localhost:8080/todos/delete";
 
     axios.delete(req_url, {
