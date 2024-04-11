@@ -5,15 +5,20 @@
       <p>{{message}}</p>
     </div>
   } @else {
-    <h1>Pending</h1>
-    @for (todo of pendingTodos; track $index) {
-      <app-todo-item todoId={{todo.id}} title={{todo.title}} [completed]="todo.completed" todoId={{todo.id}}></app-todo-item>
-    }
 
-    <h1>Completed</h1>
-    @for (todo of completedTodos; track $index) {
-      <app-todo-item todoId={{todo.id}} title={{todo.title}} [completed]="todo.completed" todoId={{todo.id}}></app-todo-item>
-    }
+    <details open>
+      <summary class="text-3xl font-bold text-slate-600" >Pending 🕰️</summary>
+      @for (todo of pendingTodos; track $index) {
+        <app-todo-item todoId={{todo.id}} title={{todo.title}} [completed]="todo.completed" todoId={{todo.id}}></app-todo-item>
+      }
+    </details>
+
+    <details>
+      <summary class="text-3xl font-bold text-slate-600" >Completed ✔️</summary>
+      @for (todo of completedTodos; track $index) {
+        <app-todo-item todoId={{todo.id}} title={{todo.title}} [completed]="todo.completed" todoId={{todo.id}}></app-todo-item>
+      }
+    </details>
   }
 
 </div>
