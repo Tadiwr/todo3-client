@@ -25,6 +25,9 @@ export class TodoListViewComponent {
   private req_url = "http://localhost:8080/todos?ztoa=true";
 
   getTodos() {
+
+    this.message = "Please Wait..";
+
     axios(this.req_url, {
       method : "GET",
       headers : {
@@ -32,7 +35,12 @@ export class TodoListViewComponent {
         "Content-Type" : "application/json"
       }
     }).then((res) => {
+
       this.todoItems = res.data as TodoItem[];
+      if (this.todoItems.length === 0) {
+        this.message = "You don't have any todo";
+      }
+
     }).catch((err) => {
       const e = err as Error;
       this.message = e.message;
