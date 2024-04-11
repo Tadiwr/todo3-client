@@ -1,8 +1,10 @@
+import { RefetchDataService } from './../refetch-data.service';
 import { TodoItem } from '../../lib/types/todo.type';
 import { Component } from '@angular/core';
 import { TodoItemComponent } from "../todo-item/todo-item.component";
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import axios from 'axios';
 
 @Component({
     selector: 'app-todo-list-view',
@@ -18,21 +20,30 @@ export class TodoListViewComponent {
   todoItems : TodoItem[] = [];
   message = "Please Wait...";
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private refetch : RefetchDataService) {}
 
-  private api_url = "http://localhost:8080/todos";
+  private req_url = "http://localhost:8080/todos?ztoa=true";
 
   getTodos() {
-    let todosOb : Observable<TodoItem[]>;
-    todosOb = this.http.get<TodoItem[]>(this.api_url);
-
-    todosOb.subscribe((res) => {
-      this.todoItems = res;
-    });
+    axios(this.req_url, {
+      method : "GET",
+      headers : {
+        "Accept" : "application/json",
+        "Content-Type" : "application/json"
+      }
+    }).then((res) => {
+      this.todoItems = res.data as TodoItem[];
+    }).catch((err) => {
+      const e = err as Error;
+      this.message = e.message;
+    })
   }
 
   async ngOnInit() {
-    this.getTodos();
+    this.getTodos(); // First time fetch;
+    this.refetch.triggerRefetchObservable().subscribe(() => {
+      this.getTodos();
+    })
   }
 
 }
