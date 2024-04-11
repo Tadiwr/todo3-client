@@ -1,13 +1,14 @@
 import { RefetchDataService } from './../refetch-data.service';
 import { Component, Input } from '@angular/core';
 import axios from 'axios';
+import { TodoTickComponent } from "../todo-tick/todo-tick.component";
 
 @Component({
-  selector: 'app-todo-item',
-  standalone: true,
-  imports: [],
-  templateUrl: './todo-item.component.html',
-  styleUrl: './todo-item.component.css'
+    selector: 'app-todo-item',
+    standalone: true,
+    templateUrl: './todo-item.component.html',
+    styleUrl: './todo-item.component.css',
+    imports: [TodoTickComponent]
 })
 export class TodoItemComponent {
   @Input() title: string = "";

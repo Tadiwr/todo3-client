@@ -1,7 +1,7 @@
 <div id={{todoId}} class="flex flex-row p-2 mb-3" >
 
   <div class="w-3/4 flex justify-start items-center flex-row" >
-    <input class="mr-3 w-5 rounded-xl"  (click)="toggleComplete()"  type="checkbox" [checked]="completed" name="todo-checked">
+    <app-todo-tick (click)="toggleComplete()" checked={{completed}}/>
 
     @if (completed) {
       <s class="text-xl text-slate-400" >{{title}}</s>
