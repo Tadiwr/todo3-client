@@ -12,7 +12,7 @@ import axios from 'axios';
   templateUrl: './bottom-bar.component.html',
   styleUrl: './bottom-bar.component.css',
   providers : [HttpClientModule]
-  
+
 })
 export class BottomBarComponent {
   constructor(private http: HttpClient, private refetch : RefetchDataService) {}
@@ -34,6 +34,7 @@ export class BottomBarComponent {
       }
     })
     .then((res) => {
+      this.newTodo = "";
       this.refetch.triggerRefetch();
       this.message = "Add Todo";
     })
