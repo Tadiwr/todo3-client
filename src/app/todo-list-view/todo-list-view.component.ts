@@ -18,6 +18,8 @@ import axios from 'axios';
 export class TodoListViewComponent {
 
   todoItems : TodoItem[] = [];
+  completedTodos : TodoItem[] = [];
+  pendingTodos : TodoItem[] = [];
   message = "Please Wait...";
 
   constructor(private http: HttpClient, private refetch : RefetchDataService) {}
@@ -37,6 +39,8 @@ export class TodoListViewComponent {
     }).then((res) => {
 
       this.todoItems = res.data as TodoItem[];
+      this.filterTodos();
+
       if (this.todoItems.length === 0) {
         this.message = "You don't have any todo";
       }
@@ -48,9 +52,22 @@ export class TodoListViewComponent {
   }
 
   async ngOnInit() {
-    this.getTodos(); // First time fetch;
+    this.getTodos();// First time fetch;
     this.refetch.triggerRefetchObservable().subscribe(() => {
       this.getTodos();
+    })
+  }
+
+  filterTodos() {
+    this.completedTodos = [];
+    this.pendingTodos = [];
+
+    this.todoItems.forEach((todo, index) => {
+      if (todo.completed == true) {
+        this.completedTodos = [...this.completedTodos,todo];
+      } else {
+        this.pendingTodos = [...this.pendingTodos,todo];
+      }
     })
   }
 

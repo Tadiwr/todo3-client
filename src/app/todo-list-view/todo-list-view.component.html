@@ -4,9 +4,16 @@
     <div class="flex flex-col h-full justify-center items-center" >
       <p>{{message}}</p>
     </div>
+  } @else {
+    <h1>Pending</h1>
+    @for (todo of pendingTodos; track $index) {
+      <app-todo-item todoId={{todo.id}} title={{todo.title}} [completed]="todo.completed" todoId={{todo.id}}></app-todo-item>
+    }
+
+    <h1>Completed</h1>
+    @for (todo of completedTodos; track $index) {
+      <app-todo-item todoId={{todo.id}} title={{todo.title}} [completed]="todo.completed" todoId={{todo.id}}></app-todo-item>
+    }
   }
 
-  @for (todo of todoItems; track $index) {
-    <app-todo-item todoId={{todo.id}} title={{todo.title}} [completed]="todo.completed" todoId={{todo.id}}></app-todo-item>
-  }
 </div>
