@@ -1,7 +1,6 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { catchError, map } from 'rxjs';
 import { RefetchDataService } from '../refetch-data.service';
 import axios from 'axios';
 

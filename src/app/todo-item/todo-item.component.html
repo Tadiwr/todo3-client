@@ -1,4 +1,11 @@
 <div id={{todoId}} class="flex flex-row p-2 mb-3" >
-  <input class="mr-3 w-5 rounded-xl"  type="checkbox" [checked]="completed" name="todo-checked">
-  <p class="text-xl" >{{title}}</p>
+
+  <div class="w-3/4 flex justify-start items-center flex-row" >
+    <input class="mr-3 w-5 rounded-xl"  type="checkbox" [checked]="completed" name="todo-checked">
+    <p class="text-xl" >{{title}}</p>
+  </div>
+
+  <div  (click)="onDelete()" class="w-1/5 hover:bg-red-500 hover:text-white rounded-lg text-red-500 flex flex-row justify-center items-center" >
+    <p class=" text-end font-semibold cursor-default " >Delete</p>
+  </div>
 </div>

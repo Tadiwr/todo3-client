@@ -23,5 +23,9 @@ export class TodoItemComponent {
   toggleComplete() {
 
   }
+
+  async onDelete() {
+    console.log("Clicked the button");
+  }
 }
 
